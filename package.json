@@ -1,0 +1,82 @@
+{
+  "name": "english-playground",
+  "version": "0.0.0",
+  "description": "description",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "ts-node -r tsconfig-paths/register src/main.ts",
+    "debug:serverless": "npm run prestart:prod && export SLS_DEBUG=* && node --inspect ./node_modules/.bin/serverless offline start --migrate",
+    "start:dev": "nodemon",
+    "start:debug": "nodemon --config nodemon-debug.json",
+    "prestart:prod": "rimraf dist && npm run build",
+    "start:prod": "node dist/main.js",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "dependencies": {
+    "@nestjs/common": "^6.0.0",
+    "@nestjs/core": "^6.0.0",
+    "@nestjs/platform-express": "^6.0.0",
+    "aws-lambda": "^0.1.2",
+    "aws-serverless-express": "^3.3.5",
+    "bcrypt": "^3.0.6",
+    "class-validator": "^0.9.1",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^1.6.5",
+    "path": "^0.12.7",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^2.6.2",
+    "rxjs": "^6.3.3",
+    "serverless-dynamodb-local": "^0.2.37",
+    "type-dynamo": "^0.1.6"
+  },
+  "devDependencies": {
+    "@nestjs/swagger": "^3.0.2",
+    "@nestjs/testing": "^6.0.0",
+    "@types/aws-lambda": "^8.10.24",
+    "@types/aws-serverless-express": "^3.3.0",
+    "@types/bcrypt": "^3.0.0",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.16.0",
+    "@types/jest": "^23.3.13",
+    "@types/jsonwebtoken": "^8.3.2",
+    "@types/node": "^10.12.18",
+    "@types/supertest": "^2.0.7",
+    "class-transformer": "^0.2.0",
+    "jest": "^23.6.0",
+    "nodemon": "^1.18.9",
+    "prettier": "^1.15.3",
+    "serverless": "^1.41.0",
+    "serverless-offline": "^4.9.2",
+    "supertest": "^3.4.1",
+    "swagger-ui-express": "^4.0.2",
+    "ts-jest": "^23.10.5",
+    "ts-loader": "^5.3.3",
+    "ts-node": "^7.0.1",
+    "tsconfig-paths": "^3.7.0",
+    "tslint": "5.12.1",
+    "typescript": "^3.2.4"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}
