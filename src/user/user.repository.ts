@@ -1,7 +1,7 @@
-import { User } from "../models/user";
-import { db } from "../db";
+import { User } from "./user";
+import { db } from "../inftastructure/db";
 import { match, isEqualTo } from "type-dynamo";
-import { ConflictException } from "@nestjs/common";
+import { ConflictException, NotFoundException } from "@nestjs/common";
 import { hash } from 'bcrypt';
 
 const UsersInstance = db.define(User, {
@@ -31,5 +31,14 @@ export const registerUser = async (user: User) => {
     .execute();
 };
 
-const login = async (user: User): Promise<void> {
+export const getUser = async(username: string) => {
+    try {
+        const { data: found } = await UsersInstance
+            .find({ 'username': username })
+            .execute();
+        return found;
+    } catch (error) {
+        console.log(error);
+        throw new NotFoundException();
+    }
 }

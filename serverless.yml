@@ -38,6 +38,10 @@ functions:
     - http:
         cors: true
         path: '/users'
+        method: any  
+    - http:
+        cors: true
+        path: '/users/login'
         method: any    
     - http:
         cors: true
